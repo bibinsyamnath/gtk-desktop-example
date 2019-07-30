@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gtk-desktop-example">
+	<schema id="com.github.kenvandine.gtk-desktop-example" path="/com/github/kenvandine/gtk-desktop-example/">
+		<key name="example-string" type="s">
+			<default>'Foo'</default>
+			<summary>Example Summary</summary>
+			<description>Example Description.</description>
+		</key>
+
+	</schema>
+</schemalist>

@@ -1,0 +1,7 @@
+data/com.github.kenvandine.gtk-desktop-example.desktop.in
+data/com.github.kenvandine.gtk-desktop-example.appdata.xml.in
+data/com.github.kenvandine.gtk-desktop-example.gschema.xml
+src/window.ui
+src/main.py
+src/window.py
+
