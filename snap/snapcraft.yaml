@@ -1,0 +1,54 @@
+name: gtk-desktop-example
+version: git
+version-script: |
+  echo $(date --utc +%Y%m%d).$(git rev-parse HEAD | cut -c -7)
+summary: GTK Desktop Example
+description: |
+  GTK Desktop Example
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict
+base: core18
+
+slots:
+  # for GtkApplication registration
+  gtk-desktop-example:
+    interface: dbus
+    bus: session
+    name: com.github.kenvandine.gtk-desktop-example
+
+apps:
+  gtk-desktop-example:
+    command: usr/bin/gtk-desktop-example
+    desktop: usr/share/applications/com.github.kenvandine.gtk-desktop-example.desktop
+    extensions: [ gnome-3-34 ]
+    plugs:
+      - gsettings
+      - home
+      - hardware-observe
+
+parts:
+  gnome-extension-fix:
+    plugin: nil
+    build-packages:
+      - libc6-dev
+  gtk-desktop-example:
+    source: .
+    plugin: meson
+    meson-version: "0.50.0"
+    meson-parameters:
+      - --prefix=/snap/gtk-desktop-example/current/usr
+    build-environment:
+      - PATH: /snap/gnome-3-34-1804-sdk/current/usr/bin:$PATH
+    organize:
+      snap/gtk-desktop-example/current/usr: usr
+    stage-packages:
+      - lshw
+    prime:
+      - -usr/include
+      - -usr/lib/pkgconfig
+      - -usr/lib/*/pkgconfig
+      - -usr/share/pkgconfig
+      - -usr/lib/*/gdk-pixbuf-2.0
+      - -usr/lib/*/gio
+      - -usr/lib/*/gtk-3.0
